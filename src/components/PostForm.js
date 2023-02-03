@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 
-const PostForm = ({authors, setPosts}) => {
+const PostForm = ({authors, setPosts, setError}) => {
     const [newPost, setNewPost] = useState({
         summary: "",
         category: "",
@@ -26,14 +26,27 @@ const PostForm = ({authors, setPosts}) => {
             body: JSON.stringify(newPost)
         }).then(res => {
             if (res.status === 201) {
-                res.json().then(postFromBackend => setPosts(currentPosts => [postFromBackend, ...currentPosts]))
+                res.json().then(postFromBackend => {
+                    setPosts(currentPosts => [postFromBackend, ...currentPosts])
+                })
             } else {
-                res.json().then(messageObj => alert(messageObj.error))
+                res.json().then(messageObj => {
+                    debugger
+                    const oneStringErrors = Object.entries(messageObj.error).map(errArray => `${errArray[0]}: ${errArray[1]}`).join(". ")
+                    // setError({text: })
+                })
             }
         })
         .catch(err => alert(err))
     }
-
+    // else {
+    //     re.json().then(data => {
+    //        setErrors(Object.entries(data.errors)).map(err => `${err[0]} : ${err[1]}`))
+    //      })
+    //     }
+    //    })
+    //  }
+     
   return (
     <div>
         <form onSubmit={handleSubmit}>
