@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.error {
+  background-color: tomato;
+}
+.warning {
+  background-color: orange;
+}
+.success {
+  background-color: chartreuse;
+}

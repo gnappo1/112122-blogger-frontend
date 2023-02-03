@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react'
-
+import {useHistory} from "react-router-dom"
 const PostForm = ({authors, setPosts, setError}) => {
+    const history = useHistory()
+
     const [newPost, setNewPost] = useState({
         summary: "",
         category: "",
@@ -29,11 +31,18 @@ const PostForm = ({authors, setPosts, setError}) => {
                 res.json().then(postFromBackend => {
                     setPosts(currentPosts => [postFromBackend, ...currentPosts])
                 })
+                setError({text: "Post successfully created", type: "success"})
+                history.push("/")
             } else {
                 res.json().then(messageObj => {
-                    debugger
-                    const oneStringErrors = Object.entries(messageObj.error).map(errArray => `${errArray[0]}: ${errArray[1]}`).join(". ")
-                    // setError({text: })
+                    if (typeof(messageObj.error) === 'string') {
+                        setError({text: messageObj.error, type: "error"})
+                    } else {
+
+                        const oneStringErrors = Object.entries(messageObj.error).map(errArray => `${errArray[0]}: ${errArray[1]}`).join(". ")
+                        // debugger
+                        setError({text: oneStringErrors, type: "error"})
+                    }
                 })
             }
         })

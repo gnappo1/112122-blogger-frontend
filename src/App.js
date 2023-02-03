@@ -4,6 +4,7 @@ import PostForm from "./components/PostForm"
 import PostList from './components/PostList'
 import {useState, useEffect} from "react"
 import {Route, Switch} from "react-router-dom"
+import Notification from './components/Notification';
 
 function App() {
 
@@ -27,6 +28,8 @@ function App() {
 
   return (
     <div className="App">
+      <Notification error={error} setError={setError} />
+      {/* <Navbar /> */}
       <Switch>
         <Route exact path="/">
           <PostList posts={posts} />
