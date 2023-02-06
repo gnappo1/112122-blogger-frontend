@@ -1,7 +1,9 @@
-import React from 'react'
+import {useContext} from 'react'
 import Post from "./Post"
+import { PostContext } from '../context/postContext'
 
-const PostList = ({posts}) => {
+const PostList = () => {
+    const {posts} = useContext(PostContext)
     const mappedPosts = posts.map(post => <Post {...post} key={post.id} />)
 
     return (
