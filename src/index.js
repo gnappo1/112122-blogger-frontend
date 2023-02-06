@@ -4,13 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from "react-router-dom"
+import { AuthorProvider } from './context/authorContext';
+import { ErrorProvider } from './context/errorContext';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <Router>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Router>
+  <ErrorProvider>
+    <AuthorProvider>
+      <Router>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </Router>
+    </AuthorProvider>
+  </ErrorProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

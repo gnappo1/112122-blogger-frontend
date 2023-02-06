@@ -1,8 +1,13 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {useHistory} from "react-router-dom"
-const PostForm = ({authors, setPosts, setError}) => {
+import { AuthorContext } from '../context/authorContext'
+import { ErrorContext } from '../context/errorContext';
+
+const PostForm = ({setPosts}) => {
     const history = useHistory()
     const [formErrors, setFormErrors] = useState({})
+    const {authors} = useContext(AuthorContext)
+    const {setError} = useContext(ErrorContext)
 
     const [newPost, setNewPost] = useState({
         summary: "",

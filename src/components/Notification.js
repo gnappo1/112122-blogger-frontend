@@ -1,7 +1,9 @@
-import {useEffect} from 'react'
+import {useEffect, useContext} from 'react'
+import { ErrorContext } from '../context/errorContext';
 
-const Notification = ({error, setError}) => {
-
+const Notification = () => {
+    const {error, setError} = useContext(ErrorContext)
+    
     useEffect(() => {
         const timer = setTimeout(()=> {
             setError({type: "", text: ""})
@@ -9,7 +11,7 @@ const Notification = ({error, setError}) => {
         return () => {
             clearTimeout(timer)
         };
-    }, [error]);
+    }, [error, setError]);
 
   return (
     <div className={error.type}>

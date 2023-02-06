@@ -8,16 +8,16 @@ import Notification from './components/Notification';
 
 function App() {
 
-  const [authors, setAuthors] = useState([]);
+  // const [authors, setAuthors] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [error, setError] = useState({text: "", type: ""})
+  // const [error, setError] = useState({text: "", type: ""})
 
-  useEffect(() => {
-    fetch("http://localhost:3000/authors")
-    .then(res => res.json())
-    .then(setAuthors)
-    .catch(err => alert(err))
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/authors")
+  //   .then(res => res.json())
+  //   .then(setAuthors)
+  //   .catch(err => alert(err))
+  // }, []);
   
   useEffect(() => {
     fetch("http://localhost:3000/posts")
@@ -28,14 +28,14 @@ function App() {
 
   return (
     <div className="App">
-      <Notification error={error} setError={setError} />
+      <Notification />
       {/* <Navbar /> */}
       <Switch>
         <Route exact path="/">
           <PostList posts={posts} />
         </Route>
         <Route path="/posts/new">
-          <PostForm setPosts={setPosts} authors={authors} setError={setError}/>
+          <PostForm setPosts={setPosts} />
         </Route>
         
 
